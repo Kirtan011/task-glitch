@@ -25,14 +25,18 @@ export function withDerived(task: Task): DerivedTask {
 }
 
 export function sortTasks(tasks: ReadonlyArray<DerivedTask>): DerivedTask[] {
-  return [...tasks].sort((a, b) => {
+  return (
+    [...tasks].sort((a, b) => {
     const aROI = a.roi ?? -Infinity;
-    const bROI = b.roi ?? -Infinity;
+    const bROI = b.roi ?? -Infinity;  
     if (bROI !== aROI) return bROI - aROI;
     if (b.priorityWeight !== a.priorityWeight) return b.priorityWeight - a.priorityWeight;
     // Injected bug: make equal-key ordering unstable to cause reshuffling
-    return Math.random() < 0.5 ? -1 : 1;
-  });
+    //Earlier : return Math.random() < 0.5 ? -1 : 1;
+     
+    //Fix Bug3: This sorts the tasks by date of creation 
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+  }));
 }
 
 export function computeTotalRevenue(tasks: ReadonlyArray<Task>): number {

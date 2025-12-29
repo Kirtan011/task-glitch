@@ -108,7 +108,7 @@ function AppContent() {
     );
   }, [undoDelete, createActivity]);
 
-  //Fix Bug 2 : Handles closing of snackbar after deletion of task .
+  //Fix Bug 2 : Handles last deleted task state after closing of snackbar.
   const handleCloseUndo = () => {
     undoClose();
   };
