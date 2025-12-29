@@ -116,9 +116,11 @@ export default function TaskTable({ tasks, onAdd, onUpdate, onDelete }: Props) {
                     ${t.revenue.toLocaleString()}
                   </TableCell>
                   <TableCell align="right">{t.timeTaken}</TableCell>
+                  {/* Fix Bug5: Shows "-" when ROI = null and Shows Roi value upto 2 decimal when Roi= someValue*/}
                   <TableCell align="right">
-                    {t.roi == null ? "N/A" : t.roi.toFixed(1)}
+                    {t.roi == null ? "—" : t.roi.toFixed(2)}
                   </TableCell>
+
                   <TableCell>{t.priority}</TableCell>
                   <TableCell>{t.status}</TableCell>
                   <TableCell align="right">
